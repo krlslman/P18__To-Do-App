@@ -120,3 +120,8 @@
 	  font-size: 0.8rem;
 	}
   }
+
+  #todo-ul p {
+	padding-left: 15px;
+
+  }
