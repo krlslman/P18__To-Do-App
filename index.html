@@ -15,19 +15,48 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <main class="container">
-      <header>To-Do List</header>
-      <section class="todo-add">
-        <input type="text" id="todo-input" placeholder="Add New Todo..." />
-        <button type="submit" id="todo-button">Add</button>
-      </section>
+    <div class="page">
+      <main class="container">
+        <header>To-Do List</header>
+        <section class="todo-add">
+          <input type="text" id="todo-input" placeholder="Add New Todo..." />
+          <button type="submit" id="todo-button">Add</button>
+        </section>
 
-      <section class="todos">
-        <ul id="todo-ul"></ul>
-      </section>
-    </main>
+        <section class="todos">
+          <ul id="todo-ul"></ul>
+        </section>
+      </main>
+
+      <main class="container-completed">
+        <header>Completed List</header>
+        <section class="todo-add">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search Completed Todo..."
+          />
+          <button type="submit" id="button_search">Search</button>
+        </section>
+
+        <section class="completeds">
+          <ul id="completeds-ul"></ul>
+        </section>
+      </main>
+    </div>
     <!-- <script src="app.js"></script> -->
-    <script src="app_localStorage.js"></script>
+    <script src="app_localStorage+2divs.js"></script>
   </body>
 </html>
 <!--      border: red solid 2px;     -->
+<!-- 
+    comp'ta checke basınca todos local güncellemesi
+    todos'ta checke basınca comp local güncellemesi
+
+    content comp'a gelmiyor
+
+
+
+
+
+ -->
