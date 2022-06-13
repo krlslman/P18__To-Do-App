@@ -13,67 +13,57 @@ function renderSavedTodos() {
     createListElement(todo);
   });
 }
+
 function createListElement(todo) {
   //? we have destructured each todo object
   const { id, content, isDone } = todo;
   todoUl.innerHTML += `
 	  <li id=${id} class=${isDone ? "checked" : ""}>
-	  	<p>${content}</p>
-	  	<i class="fa fa-check"></i>
-		<i class="fa fa-trash"></i>
-	  </li>`;
-}
-function createListElement(todo) {
-  //? we have destructured each todo object
-  const { id, content, isDone } = todo;
-  todoUl.innerHTML += `
-	  <li id=${id} class=${isDone ? "checked" : ""}>
-	  	<p>${content}</p>
+	  	<p class='pContentOfItem'>${content}</p>
 	  	<i class="fa fa-check"></i>
 		<i class="fa fa-trash"></i>
 	  </li>`;
 }
 //! ----------------------------end-------------------------------
-
+// 
+// 
+// 
+// 
+// 
 //! -------------- COMPLETEDS container DEFINITIONS --------------
 //! Selectors for completeds container
 const btn_search = document.getElementById("button_search");
 const searchInput = document.getElementById("search-input");
 const completeds_Ul = document.getElementById("completeds-ul");
-let tempObj = "";
+let lastClickedCompLi;
+let tempHtmlObj = ""; //? for the last clicked one
 
 //! bring data from local for completed todos
 let completeds = JSON.parse(localStorage.getItem("completeds")) || [];
 
-// BURASI ÇALIŞMIYOR,2 FONKSİYON.
 renderSaved_Completeds();
+//? On start, read data from localStorage and create latest list
 function renderSaved_Completeds() {
-	completeds.forEach((i) => {
+  completeds.forEach((i) => {
     createListElement_Completeds(i);
   });
 }
 function createListElement_Completeds(comp_item) {
-	//? we have destructured each object
-	// const { id, content, isDone } = item;
-	// tempObj = { id, content, isDone };
-	// completeds.unshift(tempObj);
-	//? original;
-	const { id, content, isDone } = comp_item;
-	completeds.innerHTML += `
+  //? we have destructured each object
+  const { id, content, isDone } = comp_item;
+  completeds_Ul.innerHTML += `
 	<li id=${id} class=${isDone ? "checked" : ""}>
-	<p>${content}</p>
+	<p class='pContentOfItem'>${content}</p>
 	<i class="fa fa-check"></i>
 	<i class="fa fa-trash"></i>
 	</li>`;
-	//! ??
-	localStorage.setItem("completeds", JSON.stringify(completeds));
-	completeds = JSON.parse(localStorage.getItem("completeds")) || [];
-
 }
-
-
 //! ----------------------------end-------------------------------
-
+// 
+// 
+// 
+// 
+// 
 //! -----------------TODO container EVENTS -----------------------
 //! Let the input be active at the beginning
 window.onload = function () {
@@ -100,9 +90,10 @@ btn_add.addEventListener("click", () => {
     //? Save final array to localStorage
     localStorage.setItem("todos", JSON.stringify(todos));
 
-	//? add tich and trash buttons with func.
+    //? add tick and trash buttons with the func.
     createListElement(todoObject);
-	//? empty input box
+
+    //? empty the input box
     todoInput.value = "";
   }
 });
@@ -111,15 +102,19 @@ btn_add.addEventListener("click", () => {
 todoUl.addEventListener("click", (e) => {
   const id = e.target.parentElement.getAttribute("id");
 
-//! FOR LAST CLİCKED Lİ
-	lastClickedTodoLi = {'id' : e.target.parentElement.id, 'isDone':'true', 'content':e.target.querySelector()};
+  //! Last clicked TODO li item (To send completeds)
+  lastClickedTodoLi = {
+    id: e.target.parentElement.id,
+    isDone: "true",
+    content: e.target.parentElement.querySelector(".pContentOfItem").innerHTML,
+  };
 
-  //! If the event came from one of the delete buttons
+  //! If the event came from one of the delete button
   if (e.target.classList.contains("fa-trash")) {
-    //? Delete the relevant element of the array
+    //? Delete the relevant element of the array :local
     todos = todos.filter((todo) => todo.id != id);
 
-    //? Delete related li element in DOM:: you dont want it to see after refresh
+    //? Delete related li element in DOM
     e.target.parentElement.remove();
 
     //? Save final todos array to localStorage
@@ -128,73 +123,43 @@ todoUl.addEventListener("click", (e) => {
 
   //! If the event came from the completed-tick
   if (e.target.classList.contains("fa-check")) {
-    //? when click on a tick;
 
-	const { id, content, isDone } =
+    //? Push last clicked item To completeds array
+    completeds.push(lastClickedTodoLi);
 
-	//? push the one to the completeds array
-	// todoObject = {
-	// 	//? create info object
-	// 	id: new Date().getTime(),
-	// 	isDone: false,
-	// 	content: 'asd',
-	//   };
-  
-	  //? Push newly created todo into array
-	//   completeds.push(todoObject);
-	  completeds.push(lastClickedTodoLi);
+    //? Add it To completed container :DOM
+    tempHtmlObj = e.target.parentElement;
+    completeds_Ul.append(tempHtmlObj);
 
-    //? move it From todo container To completed container
-    tempObj = e.target.parentElement;
-    completeds_Ul.append(tempObj);
-    todos = todos.filter((todo) => todo.id != tempObj.id);
+    //? remove it From todo container
+    todos = todos.filter((todo) => todo.id != tempHtmlObj.id);
 
-
-	//? OFF - aynı containerda checked-unchecked geçişinde kullandığımız kod bloğu
-    // //? Update the isDone part of the relevant element in the todos array :local
-    // todos.map((todo, index) => {
-    // if (todo.id == id) {  //?  for clicked-todo
-    // 	todos[index].isDone = !todos[index].isDone; //? reverse its isDone boolean
-    // }
-    // });
-
-	// xxx  buraya odaklan;
-    //? Save final todos array to localStorage : In order to see after refresh
+    //? Save final arrays to localStorage (In order to see after refresh)
     localStorage.setItem("todos", JSON.stringify(todos));
     localStorage.setItem("completeds", JSON.stringify(completeds));
-
-
-	//? OFF - aynı containerda checked-unchecked geçişinde kullandığımız kod bloğu
-    // ? If there is a class named checked in the relevant li element, delete it (DOM)
-    if (!e.target.parentElement.classList.contains("checked")) {
-      e.target.parentElement.classList.add("checked");
-    } 
   }
 });
 
 //! ----------------------------end-------------------------------
-
-
-
-
+// 
+// 
+// 
+// 
+// 
+// 
 //! -----------------COMPLETEDS container EVENTS ------------------
 //! Defining Search Button Event
-// btn_search.addEventListener("click", () => {  //SONRA
+// btn_search.addEventListener("click", () => {  // AFTER V2
 //   //? Alert, if inputBox is empty
 //   if (!searchInput.value) {
 //     alert("Please enter your search word");
-	
 //   } else {
 //     //? if inputBox is not empty,
-
-
-//     //? filter completed array with search inputbox
+//     //? filter 'completed array' with search inputbox
 //     //   completeds = completeds.filter(searchInput.value);
 //     console.log("here is the filter process for search button"); //!
-
 //     //? Save final array to localStorage
 //     localStorage.setItem("completeds", JSON.stringify(completeds));
-
 //     //   createListElement(todoInput);
 //       searchInput.value = '';
 //   }
@@ -204,7 +169,14 @@ todoUl.addEventListener("click", (e) => {
 completeds_Ul.addEventListener("click", (e) => {
   const id = e.target.parentElement.getAttribute("id");
 
-//! If the event came from one of the delete buttons
+  //! Last clicked COMPLETED li item (To send TODO)
+  lastClickedCompLi = {
+    id: e.target.parentElement.id,
+    isDone: "false",
+    content: e.target.parentElement.querySelector(".pContentOfItem").innerHTML,
+  };
+
+  //! If the event came from one of the delete buttons
   if (e.target.classList.contains("fa-trash")) {
     //? Delete the relevant element of the array
     completeds = completeds.filter((completed) => completed.id != id);
@@ -212,43 +184,45 @@ completeds_Ul.addEventListener("click", (e) => {
     //? Delete related li element in DOM:: you dont want it to see after refresh
     e.target.parentElement.remove();
 
-    //? Save final todos array to localStorage
+    //? Save final completeds array to localStorage
     localStorage.setItem("completeds", JSON.stringify(completeds));
   }
 
-
   //! If the event came from the completed-tick
   if (e.target.classList.contains("fa-check")) {
-    //? when click on a tick;
+    tempHtmlObj = e.target.parentElement;
+    
+    //? Delete the relevant element of the array
+    completeds = completeds.filter((comp) => comp.id != tempHtmlObj.id);
+    
+    
+
+
+
+
+
+
 
     //? move it From completed container To todo container
-    tempObj = e.target.parentElement;
-    todoUl.append(tempObj);
+    todoUl.appendChild(tempHtmlObj);
 
-	//? remove item from completeds array
-	// completeds.remove(tempObj);
+    // todoUl.innerHTML += lastClickedCompLi;
 
-	//! olmadanda şuan çalışıyor;
-    // todos = todos.filter((todo) => todo.id != tempObj.id);
-    // console.log('yess:' + tempObj.id);
+    //? Push the item into todos and update
+    todos.push(lastClickedCompLi);
+    localStorage.setItem("todos", JSON.stringify(todos));
 
-    //? Update the isDone part of the relevant element in the todos array :local
-    // todos.map((todo, index) => {
-    //   if (todo.id == id) {
-        //?  for clicked-todo
-        // todos[index].isDone = !todos[index].isDone; //? reverse its isDone boolean
-        // completeds[index].isDone = !completeds[index].isDone; //? reverse its isDone boolean
-    //   }
-    // });
-
-    //? Save final todos array to localStorage : In order to see after refresh
+    completeds = completeds.filter((completed) => completed.id != id);
+    
+    
+    //! olmadanda şuan çalışıyor;
+    todos = todos.filter((todo) => todo.id != tempHtmlObj.id);
+    
+    tempHtmlObj.remove();
+    //? Save final arrays to localStorage 
     localStorage.setItem("todos", JSON.stringify(todos));
     localStorage.setItem("completeds", JSON.stringify(completeds));
 
-    //? If there is a class named checked in the relevant li element, delete it (DOM)
-    if (e.target.parentElement.classList.contains("checked")) {
-      e.target.parentElement.classList.remove("checked");
-    } 
   }
 });
 //! ----------------------------end-------------------------------
