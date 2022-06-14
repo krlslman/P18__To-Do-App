@@ -156,7 +156,7 @@ btn_search.addEventListener("click", () => {  // AFTER V2
   } else {
     //? if inputBox is not empty,
     //? filter 'completed array' with search inputbox
-    completeds = completeds.filter(searchInput.value);
+    completeds = completeds.filter(completeds.content.includes(searchInput.value));
     console.log("here is the filter process for search button"); //!
     //? Save final array to localStorage
     localStorage.setItem("completeds", JSON.stringify(completeds));

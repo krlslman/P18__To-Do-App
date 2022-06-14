@@ -15,11 +15,14 @@
 	--color1_div2_2: #C3083F; */
 	 
 	--color1_bg_1: #141526;
-	--color1_bg_2: #1A1A1C;
+	--color1_bg_2: #1c1729;
 	--color1_div1_1: #26273B;
-	--color1_div1_2: #950741;
+	--color1_div1_2: #131536;
 	--color1_div2_1: #950741;
-	--color1_div2_2: #C3083F;
+	--color1_div2_2: #26273B;
+	--color1: #00afa1; 
+	--color2: #251994;
+	--color3: #64219b;
 }
 * {
 	margin: 0;
@@ -43,9 +46,9 @@
 	/* min-width: 390px; */
 	height: 80vh;
 	border-radius: 25px;
-	box-shadow: 2px 2px 20px rgba(48, 1, 255, 0.74);
+	box-shadow: 0px 0px 10px rgba(48, 1, 255, 0.74);
 	/* background-color: rgb(200, 175, 128); */
-	background-image: linear-gradient(var(--color1_div1_1), var(--color1_div1_2));
+	background-image: linear-gradient(var(--color1_div1_2), var(--color1_div1_1));
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -56,9 +59,9 @@
 	/* min-width: 390px; */
 	height: 80vh;
 	border-radius: 25px;
-	box-shadow: 2px 2px 20px rgba(48, 1, 255, 0.74);
+	box-shadow: 0px 0px 10px rgba(120, 1, 255, 0.74);
 	/* background-color: rgb(128, 200, 179); */
-	background-image: linear-gradient(var(--color1_div1_1), var(--color1_div1_2));
+	background-image: linear-gradient(var(--color1_div1_2), var(--color1_div1_1));
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -92,10 +95,11 @@
   #todo-button {
 	width: 20%;
 	padding: 0.7rem;
-	background-color: #194e5f;
-	color: #fff;
+	/* background-color: #194e5f; */
+	background-image: linear-gradient(var(--color1), var(--color2),var(--color3));
+	color: white;
 	font-size: 1rem;
-	font-weight: bold;
+	font-weight: normal;
 	border-radius: 10px;
 	border: none;
 	
@@ -115,7 +119,7 @@
 	background-color: #0f3865;
 	color: #fff;
 	font-size: 1rem;
-	font-weight: bold;
+	font-weight: normal;
 	border-radius: 10px;
 	border: none;
 	
@@ -164,9 +168,20 @@
 	color: #ffffff;
 	cursor: pointer;
   }
+  /* li .fa-trash {
+	padding: 1rem;
+	color: rgba(255, 0, 0, 0.4);
+	cursor: pointer;
+  } */
+  li .fa-trash:hover {
+	padding: 1rem;
+	color: rgba(255, 0, 0, 0.4);
+	cursor: pointer;
+  }
   
-  li i:hover {
-	opacity: 0.3;
+  li i:not(.fa-trash):hover {
+	opacity: 0.5;
+	color: #03964f;
   }
   
   li p {
@@ -176,7 +191,7 @@
   }
   
   li.checked > .fa-check {
-	color: #00e676;
+	color: #03964f;
   }
   
   li.checked > p {
