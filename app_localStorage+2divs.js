@@ -149,21 +149,21 @@ todoUl.addEventListener("click", (e) => {
 // 
 //! -----------------COMPLETEDS container EVENTS ------------------
 //! Defining Search Button Event
-// btn_search.addEventListener("click", () => {  // AFTER V2
-//   //? Alert, if inputBox is empty
-//   if (!searchInput.value) {
-//     alert("Please enter your search word");
-//   } else {
-//     //? if inputBox is not empty,
-//     //? filter 'completed array' with search inputbox
-//     //   completeds = completeds.filter(searchInput.value);
-//     console.log("here is the filter process for search button"); //!
-//     //? Save final array to localStorage
-//     localStorage.setItem("completeds", JSON.stringify(completeds));
-//     //   createListElement(todoInput);
-//       searchInput.value = '';
-//   }
-// });
+btn_search.addEventListener("click", () => {  // AFTER V2
+  //? Alert, if inputBox is empty
+  if (!searchInput.value) {
+    alert("Please enter your search word");
+  } else {
+    //? if inputBox is not empty,
+    //? filter 'completed array' with search inputbox
+    completeds = completeds.filter(searchInput.value);
+    console.log("here is the filter process for search button"); //!
+    //? Save final array to localStorage
+    localStorage.setItem("completeds", JSON.stringify(completeds));
+    //   createListElement(todoInput);
+      searchInput.value = '';
+  }
+});
 
 //! Event definition for delete
 completeds_Ul.addEventListener("click", (e) => {
@@ -194,35 +194,23 @@ completeds_Ul.addEventListener("click", (e) => {
     
     //? Delete the relevant element of the array
     completeds = completeds.filter((comp) => comp.id != tempHtmlObj.id);
+
+    //? move it From completed container To todo container :? instead of this move it to local array and pull from there with the func.
     
-    
-
-
-
-
-
-
-
-    //? move it From completed container To todo container
-    todoUl.appendChild(tempHtmlObj);
-
-    // todoUl.innerHTML += lastClickedCompLi;
-
     //? Push the item into todos and update
     todos.push(lastClickedCompLi);
-    localStorage.setItem("todos", JSON.stringify(todos));
+  
 
-    completeds = completeds.filter((completed) => completed.id != id);
-    
-    
-    //! olmadanda şuan çalışıyor;
-    todos = todos.filter((todo) => todo.id != tempHtmlObj.id);
-    
     tempHtmlObj.remove();
+
     //? Save final arrays to localStorage 
     localStorage.setItem("todos", JSON.stringify(todos));
     localStorage.setItem("completeds", JSON.stringify(completeds));
 
+    todoUl.innerHTML = "";
+    completeds_Ul.innerHTML = "";
+    renderSaved_Completeds();
+    renderSavedTodos()
   }
 });
 //! ----------------------------end-------------------------------
