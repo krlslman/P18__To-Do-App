@@ -1,3 +1,26 @@
+:root{
+	/* --color1_bg_1: #938E94;
+	--color1_bg_2: #938E94;
+	--color1_div1_1: rgb(239, 208, 202);
+	--color1_div1_2: rgb(193, 188, 172);
+	--color1_div2_1: rgb(151, 155, 141);
+	--color1_div2_2: #557A95;
+	 */
+
+	/* --color1_bg_1: #24242e;
+	--color1_bg_2: #1A1A1C;
+	--color1_div1_1: #C3083F;
+	--color1_div1_2: #950741;
+	--color1_div2_1: #950741;
+	--color1_div2_2: #C3083F; */
+	 
+	--color1_bg_1: #141526;
+	--color1_bg_2: #1A1A1C;
+	--color1_div1_1: #26273B;
+	--color1_div1_2: #950741;
+	--color1_div2_1: #950741;
+	--color1_div2_2: #C3083F;
+}
 * {
 	margin: 0;
 	padding: 0;
@@ -7,7 +30,7 @@
   
   body {
 	height: 100vh;
-	background-image: linear-gradient(#5e5252, #323d4b);
+	background-image: linear-gradient(var(--color1_bg_1), var(--color1_bg_2));
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -20,8 +43,9 @@
 	/* min-width: 390px; */
 	height: 80vh;
 	border-radius: 25px;
-	box-shadow: 2px 2px 20px rgba(34, 24, 24, 0.911);
-	background-color: rgb(200, 175, 128);
+	box-shadow: 2px 2px 20px rgba(48, 1, 255, 0.74);
+	/* background-color: rgb(200, 175, 128); */
+	background-image: linear-gradient(var(--color1_div1_1), var(--color1_div1_2));
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -32,16 +56,18 @@
 	/* min-width: 390px; */
 	height: 80vh;
 	border-radius: 25px;
-	box-shadow: 2px 2px 20px rgba(34, 24, 24, 0.911);
-	background-color: rgb(128, 200, 179);
+	box-shadow: 2px 2px 20px rgba(48, 1, 255, 0.74);
+	/* background-color: rgb(128, 200, 179); */
+	background-image: linear-gradient(var(--color1_div1_1), var(--color1_div1_2));
 	display: flex;
 	flex-direction: column;
 	align-items: center;
   }
   
   header {
+	/* color: white; */
 	font-size: 2rem;
-	color: rgb(41, 41, 41);
+	color: rgb(146, 139, 184);
 	/* text-shadow: 3px 5px 10px black; */
 	text-align: center;
 	padding: 1rem;
@@ -120,21 +146,22 @@
   }
   
   ul li {
-	background-color: #eee;
+	background-color: rgba(238, 238, 238, 0.76);
 	color: rgb(41, 41, 41);
 	font-weight: bold;
 	margin-bottom: 1rem;
 	display: flex;
 	align-items: center;
+	border-radius: 10px;
   }
   
   ul li:nth-child(even) {
-	background: #dde6f5;
+	background-color: rgba(238, 238, 238, 0.808);
   }
   
   li i {
 	padding: 1rem;
-	color: #ea0a0a;
+	color: #ffffff;
 	cursor: pointer;
   }
   
@@ -144,7 +171,8 @@
   
   li p {
 	flex: auto;
-	padding: 0.2rem;
+	padding: 0.2rem;	
+	font-weight: 200;
   }
   
   li.checked > .fa-check {
@@ -154,7 +182,7 @@
   li.checked > p {
 	color: rgb(41, 41, 41);
 	/* text-decoration: line-through; */
-	color: #138226;
+	color: #241382;
 	font-weight: normal;
   }
   
