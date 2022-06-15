@@ -262,7 +262,7 @@ function dateTime_function(){
   let m = date.getMinutes();
   let s = date.getSeconds();
   let d = date.getDate();
-  let mo = date.getMonth()-1;
+  let mo = date.getMonth()+1;
   let y = date.getFullYear().toString()
   // .substr(-2);
 
