@@ -153,15 +153,27 @@ btn_search.addEventListener("click", () => {  // AFTER V2
   //? Alert, if inputBox is empty
   if (!searchInput.value) {
     alert("Please enter your search word");
-  } else {
-    //? if inputBox is not empty,
-    //? filter 'completed array' with search inputbox
-    completeds = completeds.filter(completeds.content.includes(searchInput.value));
-    console.log("here is the filter process for search button"); //!
-    //? Save final array to localStorage
-    localStorage.setItem("completeds", JSON.stringify(completeds));
-    //   createListElement(todoInput);
-      searchInput.value = '';
+  } else {    //? if inputBox is not empty,
+
+    function myFilterFunction() {
+      // Declare variables
+      let filter,liAll, p, i, txtValue;
+      filter = searchInput.value.toLowerCase();
+      liAll = completeds_Ul.getElementsByTagName('li');
+    
+      // Loop through all list items, and hide those who don't match the search query
+      for (i = 0; i < liAll.length; i++) {
+        p = liAll[i].getElementsByTagName("p")[0];
+        txtValue = p.textContent || p.innerText;
+        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+          liAll[i].style.display = "";
+        } else {
+          liAll[i].style.display = "none";
+        }
+      }
+    };
+
+    myFilterFunction();
   }
 });
 
@@ -240,3 +252,71 @@ searchInput.addEventListener("keydown", (e) => {
     btn_search.click();
   }
 });
+
+
+
+
+
+//--------------- DATE AND TIME
+// let n,y,m,d;
+// n =  new Date();
+// y = n.getFullYear();
+// m = n.getMonth() + 1;
+// d = n.getDate();
+// document.getElementById("dateTime").innerHTML = m + "/" + d + "/" + y;
+
+
+
+// let today = new Date();
+// let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+// let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+// let dateTime = date+' '+time;
+// // The dateTime variable contains result as:
+
+// document.querySelector(".dateTime").innerHTML = dateTime;
+
+
+// Aşkın Bey'den esinlenildi :: link: https://appto-do.netlify.app/ ;
+
+function dateTime_function(){
+  let date = new Date();
+  let h = date.getHours();
+  let m = date.getMinutes();
+  let s = date.getSeconds();
+  let d = date.getDate();
+  let mo = date.getMonth()-1;
+  let y = date.getFullYear().toString()
+  // .substr(-2);
+
+  h = h < 10 ? "0" + h : h;
+  m = m < 10 ? "0" + m : m;
+  s = s < 10 ? "0" + s : s;
+
+  let time = h + ":" + m + ":" + s + "\n" + d + "." + mo + "." + y;
+
+  document.querySelector(".dateTime").innerText = time;
+
+  
+  
+  setTimeout(dateTime_function, 1000);
+}
+dateTime_function()
+
+
+
+//Summary section
+
+let summary = document.querySelector(".summary");
+
+if (document.querySelectorAll("#todo-ul [class='pContentOfItem']").length > 0) {
+  summary.innerHTML = `You have ${
+    document.querySelectorAll("#todo-ul").length
+  } unfinished task.`;
+}
+
+summary.innerHTML += "<br>";
+if (document.querySelectorAll("#completeds-ul [class='pContentOfItem']").length > 0) {
+  summary.innerHTML += `Congratulations 🎉: You finished ${
+    document.querySelectorAll("#completeds-ul").length
+  } task.`;
+}

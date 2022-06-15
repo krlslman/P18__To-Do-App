@@ -212,9 +212,34 @@
 	justify-content:space-between;
 	gap: 50px;
 }
+/* containerı */
+#dateTime {
+	/* border: red solid 2px; */
+	background-color: rgba(255, 255, 255, 0.3);
+	padding: 0.8rem;
+	border-radius: 10px;
+}
+/* p'si */
+.dateTime {
+	color: white;
+	text-align: center;
+}
+.summary {
+	color: white;
+}
+#summary {
+	font-size: 1.2rem;
+	justify-content: start;
+	text-align: left;
+}
+.sum_date{
+	display: flex;
+	justify-content: space-between;
+	gap: 50px;
+	margin-top: -50px;
+	margin-bottom: 2vh;
 
-
-
+}
 
 /*? ------------------- MEDIA ------------------------------- */
 
@@ -227,7 +252,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	margin-top: 90vh;
+	margin-top: 0vh;
   }
 	li p {
 	font-size: 0.8rem;
@@ -240,9 +265,21 @@
 	min-width: 500px;
   }
 
-
+#summary {
+	font-size: 0.8rem;
+}
+.sum_date{
+	font-size: 0.8rem;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-top: 590px;
+	/* border:  red solid 2px; */
+}
 
 }
+
+
 
 @media screen and (max-width: 520px) {
 	.container {
@@ -262,4 +299,14 @@
 		font-size: 0.7rem;
 		font-weight: normal;
 	  }
+	  .sum_date{
+		gap: 10px;
+		font-size: 0.7rem;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		margin-top: 600px;
+		/* border:  red solid 2px; */
+	}
 }

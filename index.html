@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,6 +15,17 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    
+    <div class="sum_date">
+      <div id="summary">
+        <p class="summary"></p>
+      </div>
+      <div id="dateTime">
+        <!-- <input type='date' id='hasta' value='<?php echo date('Y-m-d');?>'> -->
+        <p class="dateTime" onload="dateTime_function()"></p>
+      </div>
+    </div>
+
     <div class="page">
       <main class="container">
         <header>To-Do List</header>
