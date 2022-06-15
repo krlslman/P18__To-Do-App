@@ -254,28 +254,6 @@ searchInput.addEventListener("keydown", (e) => {
 });
 
 
-
-
-
-//--------------- DATE AND TIME
-// let n,y,m,d;
-// n =  new Date();
-// y = n.getFullYear();
-// m = n.getMonth() + 1;
-// d = n.getDate();
-// document.getElementById("dateTime").innerHTML = m + "/" + d + "/" + y;
-
-
-
-// let today = new Date();
-// let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-// let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-// let dateTime = date+' '+time;
-// // The dateTime variable contains result as:
-
-// document.querySelector(".dateTime").innerHTML = dateTime;
-
-
 // Aşkın Bey'den esinlenildi :: link: https://appto-do.netlify.app/ ;
 
 function dateTime_function(){
