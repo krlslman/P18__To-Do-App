@@ -288,13 +288,13 @@ let summary = document.querySelector(".summary");
 
 if (document.querySelectorAll("#todo-ul [class='pContentOfItem']").length > 0) {
   summary.innerHTML = `You have ${
-    document.querySelectorAll("#todo-ul [class='pContentOfItem']").length.length
+    document.querySelectorAll("#todo-ul [class='pContentOfItem']").length
   } unfinished task.`;
 }
 
 summary.innerHTML += "<br>";
 if (document.querySelectorAll("#completeds-ul [class='pContentOfItem']").length > 0) {
   summary.innerHTML += `Congratulations 🎉: You finished ${
-    document.querySelectorAll("#completeds-ul [class='pContentOfItem']").length.length
+    document.querySelectorAll("#completeds-ul [class='pContentOfItem']").length
   } task.`;
 }
