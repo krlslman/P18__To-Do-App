@@ -254,7 +254,7 @@ searchInput.addEventListener("keydown", (e) => {
 });
 
 
-// Aşkın Bey'den esinlenildi :: link: https://appto-do.netlify.app/ ;
+// Date ve Summary bölümü Aşkın Bey'den esinlenildi :: link: https://appto-do.netlify.app/ ;
 
 function dateTime_function(){
   let date = new Date();
